@@ -16,6 +16,9 @@ Uploading..
 > + filetree
 
 ### classic treeview
+
+![](https://github.com/csakaszamok/csak-tree/blob/master/csaktree_classictreeviewi.gif?raw=true)
+
 ### menutree
 
 ![](https://github.com/csakaszamok/csak-tree/blob/master/csaktree_menutree.gif?raw=true)
