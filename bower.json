@@ -2,7 +2,7 @@
   "name": "csak-tree",
   "description": "Polmyer 2 webcomponent for treeview,filetree,menutree,tree",
   "main": "csak-tree.html",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "vaadin-icons": "^4.1.3",
