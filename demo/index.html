@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>csak-tree demo</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../csak-tree.html">
+  <link rel="import" href="../csak-tree-item.html">
+
+  <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+  <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+  <link rel="import" href="../bower_components/iron-iconset-svg/iron-iconset-svg.html">
+
+  <link rel="import" href="../bower_components/monaco-editor/monaco-editor.html">
+  <link rel="import" href="../bower_components/paper-button/paper-button.html">
+  <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+      p.caption {
+        font-weight: bolder;
+      }
+    </style>
+  </custom-style>
+</head>
+
+<body>
+
+  <!-- https://medium.com/flexbox-and-grids/css-flexbox-grid-layout-how-to-approach-css-layouts-in-2017-and-beyond-685deef03e6c -->
+
+
+  <div class="vertical-section-container centered">
+    <h3>csak-tree demo</h3>
+
+
+    <demo-snippet class="treemenu">
+      <p class="caption">Tree menu</p>
+      <p>Control content with targetelement and targeted class</p>
+      <template>
+        <style>
+          .treemenu p2 {
+            opacity: 1;
+            margin: 0;
+          }
+
+          .treemenu csak-tree-item span:hover {
+            background-color: #1f88ed;
+            opacity: 0.5;
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            color: rgb(252, 252, 252);
+          }
+
+          .treemenu aside {
+            width: 35%;
+            min-height: 300px;
+            background-color: #1a7cda;
+            color: #ccc;
+          }
+
+          .treemenu main {
+            width: 65%;
+            min-height: 300px;
+            background-color: dodgerblue;
+          }
+
+          .treemenu aside,
+          main2 {
+            float: left;
+          }
+
+          .treemenu aside,
+          main {
+            display: table-cell;
+            font-family: 'Work Sans', sans-serif;
+          }
+
+          .treemenu-app {
+            display: flex;
+          }
+
+          .treemenu-app main>div {
+            display: none;
+          }
+
+          .treemenu-app main div.targeted {
+            display: block;
+          }
+        </style>
+
+        <div class="treemenu-app">
+          <aside>
+            <csak-tree class="treemenu" locked expanded="true">
+              <csak-tree-item targetelement="#Menu1">
+                <span>
+                  Menu1
+                </span>
+                <csak-tree-item targetelement="#Submenu1-1" text="Submenu1-1">
+
+                </csak-tree-item>
+                <csak-tree-item targetelement="#Submenu1-2">
+                  <span>
+                    Submenu1-2
+                  </span>
+                  <csak-tree-item targetelement="#Submenu1-2-1">
+                    <span>
+                      Submenu1-2-1
+                    </span>
+                  </csak-tree-item>
+                </csak-tree-item>
+              </csak-tree-item>
+              <csak-tree-item targetelement="#Menu2">
+                <span>
+                  Menu2
+                </span>
+                <csak-tree-item targetelement="#Submenu2-1">
+                  <span>
+                    Submenu2-1
+                  </span>
+                </csak-tree-item>
+                <csak-tree-item targetelement="#Submenu2-2">
+                  <span>
+                    Submenu2-2
+                  </span>
+                </csak-tree-item>
+              </csak-tree-item>
+            </csak-tree>
+          </aside>
+
+          <main>
+            <div id="Menu1">
+              <h1>Menu1 page</h1>
+              <div>
+                <h2>Menu1 content:</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+                  ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla
+                  vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
+                </p>
+              </div>
+            </div>
+            <div id="Submenu1-1">
+              <h1>Submenu1-1 page</h1>
+              <div>
+                <h2>Submenu1-1 content:</h2>
+
+                <p> Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum
+                  rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus
+                  pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero
+                  venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla
+                  mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit
+                  cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. </div>
+            </div>
+            <div id="Submenu1-2">
+              <h1>Submenu1-2 page</h1>
+              <div>
+                <h2>Submenu1-2 content:</h2>
+
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
+                  tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
+                  semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+              </div>
+            </div>
+            <div id="Submenu1-2-1">
+              <h1>Submenu1-2-1 page</h1>
+              <div>
+                <h2>Submenu1-2-1 content:</h2>
+
+                <p> Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras
+                  ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                  posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor,
+                  suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris.
+                </p>
+              </div>
+            </div>
+
+            <div id="Menu2">
+              <h1>Menu2 page</h1>
+              <div>
+                <h2>Menu2 content:</h2>
+
+                <p> Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium
+                  libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet,
+                  nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo
+                  pellentesque facilisis.
+                </p>
+              </div>
+            </div>
+            <div id="Submenu2-1">
+              <h1>Submenu2-1 page</h1>
+              <div>
+                <h2>Submenu2-1 content:</h2>
+
+                <p>Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent
+                  congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan
+                  cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+                </p>
+              </div>
+            </div>
+            <div id="Submenu2-2">
+              <h1>Submenu2-2 page</h1>
+              <div>
+                <h2>Submenu2-2 content:</h2>
+
+                <p>Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere,
+                  tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit
+                  libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis.
+                </p>
+              </div>
+            </div>
+          </main>
+        </div>
+
+      </template>
+    </demo-snippet>
+
+    <demo-snippet>
+      <p class="caption">Class treeview I</p>
+      <template>
+        <style>
+          .classictreeview {
+            min-height: 380px;
+          }
+
+          .classictreeview csak-tree-item {
+            --indent: 4vw;
+            --iron-icon-width: 16px;
+          }
+        </style>
+        <csak-tree class="classictreeview" branchiconopen="vaadin:minus-square-o" branchicon="vaadin:plus-square-o">
+          <csak-tree-item>Branch
+            <csak-tree-item>Branch
+              <csak-tree-item>Branch
+                <csak-tree-item>Leaf</csak-tree-item>
+                <csak-tree-item>Leaf</csak-tree-item>
+              </csak-tree-item>
+              <csak-tree-item>Branch
+                <csak-tree-item>Branch
+                  <csak-tree-item>Leaf</csak-tree-item>
+                  <csak-tree-item>Leaf</csak-tree-item>
+                </csak-tree-item>
+              </csak-tree-item>
+              <csak-tree-item>Leaf</csak-tree-item>
+            </csak-tree-item>
+            <csak-tree-item>Branch
+              <csak-tree-item>Leaf</csak-tree-item>
+              <csak-tree-item>Leaf</csak-tree-item>
+            </csak-tree-item>
+            <csak-tree-item>Leaf</csak-tree-item>
+            <csak-tree-item>Leaf</csak-tree-item>
+          </csak-tree-item>
+        </csak-tree>
+      </template>
+    </demo-snippet>
+
+
+    <demo-snippet>
+      <p class="caption">Class treeview II</p>
+      <p> Multiple root</p>
+      <template>
+        <style>
+          .classictreeviewii {
+            --iron-icon-width: 16px;
+            --iron-icon-height: 16px;
+            /*   color: aquamarine;*/
+            /* --icon-width: 16px;
+            --iron-icon-width: 16px;*/
+            --iron-icon-fill-color: aquamarine;
+            --iron-icon-stroke-color: aquamarine;
+          }
+        </style>
+        <csak-tree class="classictreeviewii" branchicon="vscode-app/collapsed-arrow.svg" branchiconopen="vscode-app/expanded-arrow.svg">
+          <csak-tree-item>Branch
+            <csak-tree-item>Branch
+              <csak-tree-item>Branch
+                <csak-tree-item>Leaf</csak-tree-item>
+                <csak-tree-item>Leaf</csak-tree-item>
+              </csak-tree-item>
+              <csak-tree-item>Branch
+                <csak-tree-item>Branch
+                  <csak-tree-item>Leaf</csak-tree-item>
+                  <csak-tree-item>Leaf</csak-tree-item>
+                </csak-tree-item>
+              </csak-tree-item>
+              <csak-tree-item>Leaf</csak-tree-item>
+            </csak-tree-item>
+            <csak-tree-item>Branch
+              <csak-tree-item>Leaf</csak-tree-item>
+              <csak-tree-item>Leaf</csak-tree-item>
+            </csak-tree-item>
+            <csak-tree-item>Leaf</csak-tree-item>
+            <csak-tree-item>Leaf</csak-tree-item>
+          </csak-tree-item>
+        </csak-tree>
+      </template>
+    </demo-snippet>
+
+    <demo-snippet>
+      <p class="caption">Tree with events and methods</p>
+      <template>
+        <dom-bind class="eventsdemo">
+          <style>
+            /*.node-icon {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;           
+            border-radius: 5px;
+          }*/
+
+            .eventsdemotree {
+              --iron-icon-width: 24px;
+              --iron-icon-height: 24px;
+
+              font-family: 'Roboto', 'Noto', sans-serif;
+
+              min-height: 390px;
+            }
+
+            .eventsdemotree .selected {
+              /*     color: rgb(31, 230, 31);*/
+              /*    --iron-icon-fill-color: #15a508;*/
+              /* --iron-icon-fill-color: #000000;   */
+              color: rgb(6, 135, 185);
+              font-weight: bolder;
+            }
+
+            .eventsdemotree csak-tree-item {
+              /*color: rgb(87, 84, 84);*/
+               color: rgb(5, 150, 207);
+              /*   --iron-icon-fill-color: rgb(231, 13, 13);*/
+              font-weight: normal;
+            }
+
+            .eventsdemotree #alarmitem {
+              --iron-icon-fill-color: rgb(12, 8, 248);
+            }
+
+            .eventsdemotree #alarmitem.selected {
+              --iron-icon-fill-color: rgb(201, 198, 17);
+            }
+          </style>
+
+          <template>
+            <paper-button raised onclick="eventsDemo.btnExpandAll()">Expand all</paper-button>
+            <br><br>
+            <paper-button raised onclick="eventsDemo.btnCollapseAll()">Collapse all</paper-button>
+            <br><br>
+            <paper-button raised onclick="eventsDemo.btnSelectLeaf()">Select leaf2 by id</paper-button>
+            <br>
+            <br>
+            <paper-checkbox checked="{{locked}}">Lock tree (prevent expand/collapse user action)</paper-checkbox>
+            <br>
+            <br> Selected node:
+            <label id="idselectednode"></label>
+            <csak-tree id="eventsdemotree" class="eventsdemotree" locked="{{locked}}" onclick="eventsDemo.treeOnClick(this)" leaficon="editor:insert-drive-file"
+              branchiconopen="vaadin:folder-open" branchicon="icons:folder">
+              <csak-tree-item>
+                Branch
+                <csak-tree-item>Branch
+                  <csak-tree-item>Leaf</csak-tree-item>
+                  <csak-tree-item>Leaf</csak-tree-item>
+                </csak-tree-item>
+                <csak-tree-item>Branch
+                  <csak-tree-item>Leaf</csak-tree-item>
+                  <csak-tree-item id="leaf2" icon="icons:alarm">Leaf 2</csak-tree-item>
+                  <csak-tree-item>Branch
+                    <csak-tree-item>Leaf</csak-tree-item>
+                    <csak-tree-item>Leaf</csak-tree-item>
+                    <csak-tree-item>Branch
+                      <csak-tree-item>Leaf</csak-tree-item>
+                      <csak-tree-item>Branch
+                        <csak-tree-item>Leaf</csak-tree-item>
+                        <csak-tree-item>Branch
+                          <csak-tree-item>Leaf</csak-tree-item>
+                        </csak-tree-item>
+                      </csak-tree-item>
+                    </csak-tree-item>
+                  </csak-tree-item>
+                </csak-tree-item>
+              </csak-tree-item>
+            </csak-tree>
+          </template>
+        </dom-bind>
+        <script>
+          class EventsDemo {
+            constructor() {
+              //binding variables
+              this.autobind = document.querySelector('dom-bind');
+              this.autobind.checked = false;
+
+              //init variables            
+              this.eventsDemo = document.querySelector('.eventsdemo');
+              this.eventsdemotree = this.eventsDemo.$.eventsdemotree;
+            }
+
+            treeOnClick(e) {
+              var s = e.selectedItem ? e.selectedItem.text : '<span style="font-style: italic">&lt;selected file&gt;</span>';
+              this.eventsDemo.$.idselectednode.innerHTML = s;
+            }
+
+            btnExpandAll() {
+              this.eventsdemotree.expandAll();
+            }
+
+            btnCollapseAll() {
+              this.eventsdemotree.collapseAll();
+            }
+
+            btnSelectLeaf() {
+              this.eventsdemotree.selectedItem = this.eventsDemo.$.leaf2;
+            }
+          }
+
+          var eventsDemo;
+          window.addEventListener('WebComponentsReady', function (e) {
+            eventsDemo = new EventsDemo();
+          });
+        </script>      
+
+      </template>
+
+    </demo-snippet>
+
+    <demo-snippet>
+      <p class="caption">Tree with custom images</p>
+      <!--<p>Image from: https://www.flaticon.com/free-icon/ </p>-->
+      <template>
+        <style>
+          .imagedemo {
+            --indent: 5em;
+            background-color: #503ba2;
+            min-height: 500px;
+          }
+
+          .imagedemo img {
+            width: 100px;
+            height: 100px;
+            /*background-image: url(data:image/png;base64,iVBORwA<MoreBase64SringHere>);*/
+          }
+
+          .userimg {
+            width: 100px;
+            height: 100px;
+            /*  background-image: url(data:image/png;base64,iVBORwA<MoreBase64SringHere>);*/
+          }
+
+          .imagedemo csak-tree-item {
+            --indent: 5em;
+            vertical-align: middle;
+          }
+
+          .imagedemo csak-tree-item#firstelement {
+            --indent: 0em;
+          }
+
+          .imagedemo csak-tree-item img {
+            vertical-align: middle;
+          }
+
+          /* span {
+            text-align: center;
+          }*/
+        </style>
+
+        <csak-tree class="imagedemo">
+          <csak-tree-item id="firstelement">
+            <div>
+              <span>
+                <img class="userimg" src="fish512.png" alt="Main fish" />
+              </span>
+              <span></span>
+            </div>
+            <csak-tree-item>
+              <img src="piranha512.png " />
+              <csak-tree-item>
+                <img src="orca512.png" /> </csak-tree-item>
+            </csak-tree-item>
+            <csak-tree-item>
+              <div>
+                <img src="salmon512.png" />
+              </div>
+              <csak-tree-item>
+                <img src="tuna512.png" />
+              </csak-tree-item>
+            </csak-tree-item>
+          </csak-tree-item>
+        </csak-tree>
+      </template>
+    </demo-snippet>
+
+    <demo-snippet class="vscodedemo">
+      <p class="caption">VSCode style menu with Monaco</p>
+      <p id="idselectednode"></p>
+      <template>
+        <style>
+          .vscodedemo aside {
+            width: 45%;
+            min-height: 400px;
+            max-width: 160px;
+            background-color: #353535;
+            text-decoration-color: #ccc;
+            color: #ccc;
+            float: left;
+          }
+
+          .vscodedemo main {
+            width: 100%;
+            min-width: 300px;
+            min-height: 200px;
+            background-color: #1e1e1e;
+            display: table-cell;
+            font-family: 'Work Sans', sans-serif;
+            white-space: nowrap;
+          }
+
+          .vscodedemo aside {
+            display: table-cell;
+            font-family: 'Work Sans', sans-serif;
+            white-space: nowrap;
+          }
+
+          .vscode-app {
+            display: flex;
+            white-space: nowrap;
+          }
+
+          .vscode-filetree csak-tree-item {
+            opacity: 1;
+            color: #ccc;
+            --iron-icon-width: 16px;
+          }
+
+          .vscode-filetree csak-tree-item span:hover {
+            background-color: #3f3f3f;
+            opacity: 0.95;
+            --iron-icon-width: 16px;
+            color: rgb(250, 245, 245);
+          }
+
+          .vscode-filetree csak-tree-item span {
+            background-color: #353535;
+          }
+
+          .vscode-filetree csak-tree-item.selected>span {
+            background-color: #0f4870;
+            color: rgb(250, 245, 245);
+          }
+        </style>
+
+        <div class="vscode-app">
+          <aside>
+            <csak-tree class="vscode-filetree" onclick="vscodeAppOnClick(this)" branchicon="vscode-app/collapsed-arrow.svg" branchiconopen="vscode-app/expanded-arrow.svg"
+              data='{            
+            "children ": [  
+                  {
+                    "name": "subfolder",
+                    "children": [
+                      { "name": "subsubfolder",
+                        "children": [{
+                          "name": "readme.md",
+                          "filepath": "subfolder/subsubfolder/readme.md",
+                          "icon": "vscode-app/markdown-16x.svg"
+                        } ]
+                      },
+                      { 
+                        "name": "style.css",
+                        "filepath": "subfolder/style.css",
+                        "icon": "vscode-app/css-64x.svg"
+
+                      },
+                      {
+                        "name": "another.html",
+                        "filepath": "subfolder/another.html",
+                        "icon": "vscode-app/html-16x.svg"
+                      }                      
+                    ]
+                  },
+                  {
+                    "name": "index.html",
+                    "filepath": "index.html",
+                    "icon": "vscode-app/html-16x.svg"
+                  },
+                  {
+                    "name": "app.js",
+                    "filepath": "app.js",
+                    "icon": "vscode-app/javascript-16x.svg"
+                  }             
+               ]
+             }'>
+
+          </aside>
+
+          <main>
+            <monaco-editor id="editor" style="width: 100%; height: 100%" read-only minimap language="javascript" theme="vs-dark">
+              <div id="sourcecode" slot="monaco-value">
+
+              </div>
+            </monaco-editor>
+          </main>
+        </div>
+
+        <script>
+
+          async function loadFile(url) {
+            let response = await fetch(url);
+            let text = await response.text()
+            return text;
+          }
+
+          function vscodeAppOnClick(e) {
+            var filetypes = {
+              'HTML': 'html',
+              'CSS': 'css',
+              'JS': 'javascript',
+              'MD': 'markdown'
+            }
+
+            //debugger;
+
+            var s = e.selectedItem ? e.selectedItem.text : '<span style="font-style: italic">&lt;selected file&gt;</span>';
+            document.querySelector('.vscodedemo #idselectednode').innerHTML = s;
+            if (e.selectedItem && e.selectedItem.filepath) {
+              loadFile("vscode-app/demo-app/" + e.selectedItem.filepath)
+                .then(data => {
+                  document.querySelector('#editor').value = data;
+                  var ext = e.selectedItem.filepath.split(".").pop().toUpperCase();
+                  var lang = filetypes[ext] || "javascript";
+                  document.querySelector('#editor').language = lang;
+                }
+                )
+                .catch(reason => {
+                  console.error(reason.message)
+                }
+                );
+            }
+          }
+        </script>
+
+      </template>
+    </demo-snippet>
+
+
+  </div>
+  <script>
+    document.addEventListener('WebComponentsReady', function (e) {
+      // console.clear();
+      console.info('Webcomponents is ready.')
+    });
+  </script>
+</body>
+
+</html>

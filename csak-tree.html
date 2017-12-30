@@ -1,0 +1,348 @@
+<!--<link rel="import" href="bower_components/polymer/polymer-element.html">-->
+<link rel="import" href="bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="bower_components/iron-iconset-svg/iron-iconset-svg.html">
+<link rel="import" href="bower_components/iron-icons/editor-icons.html">
+<link rel="import" href="bower_components/vaadin-icons/vaadin-icons.html">
+
+<link rel="import" href="csak-tree-item.html">
+
+<dom-module id="csak-tree">
+  <template>
+    <style>
+      :host {
+        cursor: pointer;
+        display: var(--display, inline-block);
+      }
+
+      /* csak-tree-item:not(:checked) {
+        display: none;
+        background-color: rgb(61, 63, 63);
+      }*/
+    </style>
+
+
+    <slot id="slot"></slot>
+
+  </template>
+
+  <script>
+
+    /**
+    * # cak-tree tree component
+    * In typical use, just put some `<csak-tree-item>` into `<csak-tree>`   
+    * <csak-tree>
+    *   <csak-tree-item>First item</csak-tree-item>
+    * </csak-tree>
+    * Wham! It's all awesome now!
+    * 
+    * @class CsakTree
+    * @extends {Polymer.Element}
+    * @customElement
+    * @polymer
+    * @demo https://path/to/awesomeness/demo/
+    */
+    class CsakTree extends Polymer.Element {
+      static get is() { return 'csak-tree'; }
+      static get properties() {
+        return {
+          branchicon: String,
+          branchiconopen: String,
+          leaficon: String,
+          visible: {
+            type: Boolean,
+            observer: '_visibleChange'
+          },
+          selectedItem: {
+            type: Object,
+            notify: true,
+            observer: '_selectedItemChange'
+          },
+          locked: {
+            type: Boolean,
+            value: false,
+            notify: true,
+            observer: '_lockedChange'
+          },
+          expanded: {
+            type: Boolean,
+            value: false,
+            observer: '_expandedChange'
+          },
+          _currenttargetelement: Object,
+          targetcssclass: {
+            type: String,
+            value: 'targeted'
+          },
+          data: {
+            type: String,
+            notify: true,
+            value: '',
+            observer: '_dataChange'
+          }
+        };
+      }
+
+      constructor() {
+        super();
+        this.leaficon = "";
+        this.branchicon = "";
+        this.visible = true;
+      }
+
+      /**
+      * Set selected item.
+      *
+      * @param {CsakTreeItem} item The element
+      * @param {boolean} bool Set selected or not
+       * @memberof CsakTree
+       */
+      setSelectedItem(item, bool) {
+        if (this.selectedItem) {
+          this.selectedItem.setSelected(false);
+          if (this._currenttargetelement && this.targetcssclass) {
+            this._currenttargetelement.classList.remove(this.targetcssclass);
+          }
+        }
+        item.setSelected(bool);
+        this.selectedItem = item;
+        this.firstElementChild.updateChildren();
+
+        if (this.selectedItem.targetelement && this.targetcssclass) {
+          this._currenttargetelement = this.selectedItem._targetelement;
+          this._currenttargetelement.classList.add(this.targetcssclass);
+        }
+      }
+
+      /**Polymer bugifx?: the observer not fired when newvalue equal oldvalue**/
+      /**
+       * _selectedItem change
+       * 
+       * @param {any} newValue 
+       * @param {any} oldValue 
+       * @memberof CsakTree
+       */
+      _selectedItemChange(newValue, oldValue) {
+        if (oldValue) {
+          oldValue.setSelected(false);
+        }
+        if (newValue) {
+          newValue.setSelected(true);
+        } else {
+          //this.dispatchEvent(new CustomEvent('onclick', this ));
+        }
+        this.dispatchEvent(new CustomEvent('click', { detail: { target: this } }));
+      }
+
+      /**
+       * _visible change event
+       * 
+       * @param {any} newValue 
+       * @param {any} oldValue 
+       * @event
+       * @memberof CsakTree
+       */
+      _visibleChange(newValue, oldValue) {
+
+        if (newValue === true) {
+          this.updateStyles({ '--display': 'block' });
+        } else {
+          this.updateStyles({ '--display': 'none' });
+
+        }
+      }
+
+      ready() {
+        super.ready();
+        for (let item of this.children) {
+          if (item instanceof CsakTreeItem) {
+            item.visible = true;
+            item.updateStyles({ '--indent': '0em' });
+          }
+        }
+        this.addEventListener('click', e => { this._handleClick(e) });
+        this.notifyChildren();
+      }
+
+      /**
+       * Notify children for rootparent change
+       * 
+       * @memberof CsakTree
+       */
+      notifyChildren() {
+        //notify all children in tree
+        for (let item of this.children) {
+          if (item instanceof CsakTreeItem) {
+            item.rootparentchanged(this);
+          }
+        }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+      }
+
+      disconnectedCallback() {
+        super.disconnectedCallback();
+      }
+
+      /**
+       * Mouse click event
+       * 
+       * @param {any} e 
+       * @event
+       * @memberof CsakTree
+       */
+      _handleClick(e) {
+        //debugger;
+        this.dispatchEvent(new CustomEvent('onclick', { detail: { target: e.target } }));
+      }
+
+      /**
+       * Expand children
+       * 
+       * @memberof CsakTree
+       */
+      expandAll() {
+        for (let item of this.children) {
+          if (item instanceof CsakTreeItem) {
+            item.expandChildren(false);
+          }
+        }
+        this.selectedItem = null;
+      }
+
+      /**
+       * Collapse children
+       * 
+       * @memberof CsakTree
+       */
+      collapseAll() {
+        for (let item of this.children) {
+          if (item instanceof CsakTreeItem) {
+            item.collapseChildren();
+          }
+        }
+        this.selectedItem = null;
+      }
+
+      /**
+       * Lock tree (prevent user action)
+       * 
+       * @param {any} newValue 
+       * @param {any} oldValue
+       * @event
+       * @memberof CsakTree
+       */
+      _lockedChange(newValue, oldValue) {
+        for (let item of this.children) {
+          if (item instanceof CsakTreeItem) {
+            item.lock(newValue);
+          }
+        }
+      }
+
+      /**
+       * Expanded prop changed
+       * 
+       * @param {any} newValue 
+       * @param {any} oldValue 
+       * @memberof CsakTree
+       */
+      _expandedChange(newValue, oldValue) {
+        if (newValue === true) {
+          this.expandAll()
+        } else {
+          this.collapseAll();
+        }
+      }
+
+      /**
+       * Build tree from json
+       * 
+       * @param {JSon} json 
+       * @param {CsakTree | CsakTreeItem} parent 
+       * @memberof CsakTree
+       */
+      _processData(json, parent) {
+        let keys = Object.keys(json);
+        let obj = new CsakTreeItem();
+
+        //itereate all non array props
+        for (let key of keys) {
+          let value = json[key];
+          if (value instanceof Array) {
+            continue;
+          }
+
+          obj[key] = value;
+        }
+
+        let newDiv;
+        let newContent;
+
+        if (!obj.text) {
+          newDiv = document.createElement("span");
+          newDiv.setAttribute('Style', 'display:block');
+          newContent = document.createTextNode(obj.name);
+          newDiv.appendChild(newContent);
+          obj.text = obj.name;
+        }
+
+        parent.isleaf = false;
+        if (obj.name !== undefined) {
+          let el = Polymer.dom(parent).appendChild(obj);
+          if (newDiv) {
+            newDiv.insertBefore(el.shadowRoot.querySelector('.node-icon'), newContent);
+            //the default components cant style outside, so we hide it, and add some span comp :(
+            el.hideDefaultComps();
+            el.appendChild(newDiv);
+
+          }
+        }
+        //arrays
+        for (let key of keys) {
+          let value = json[key];
+          if (value instanceof Array) {
+            for (let item of value) {
+              if (obj.name !== undefined) {
+                this._processData(item, obj);
+              } else {
+                this._processData(item, this);
+              }
+            }
+          }
+        }
+      }
+
+      /**
+       * When set data prop then fire _processData method
+       * 
+       * @param {any} newValue 
+       * @param {any} oldValue 
+       * @memberof CsakTree
+       */
+      _dataChange(newValue, oldValue) {
+        if (newValue) {
+          let datajson = JSON.parse(newValue);
+          this._processData(datajson, this);
+        }
+      }
+
+      /**
+      * Generate uuid for _id
+      * 
+      * @static
+      * @returns 
+      * @memberof CsakTreeItem
+      */
+      static uuidv4() {
+        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+          (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        )
+      }
+    }
+    window.customElements.define(CsakTree.is, CsakTree);    
+  </script>
+
+</dom-module>

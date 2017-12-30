@@ -1,0 +1,20 @@
+{
+  "name": "csak-tree",
+  "version": "0.4.0",
+  "description": "tree-menu",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "polymer serve --port 8081 | npm run watch",
+    "test": "polymer test",
+    "watch": "browser-sync start --proxy localhost:8081 --files 'csak-tree-menu.html,./*.html, src/*.html, src/*.js, images/*' "
+  },
+  "author": "",
+  "license": "ISC",
+  "dev-dependencies": {
+    "livereload": "^0.6.3"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,645 @@
+<!--<link rel="import" href="bower_components/polymer/polymer-element.html">-->
+<link rel="import" href="bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="bower_components/iron-iconset-svg/iron-iconset-svg.html">
+<link rel="import" href="bower_components/iron-icons/editor-icons.html">
+<link rel="import" href="bower_components/vaadin-icons/vaadin-icons.html">
+
+<dom-module id="csak-tree-item" class="unselected">
+
+    <template>
+        <style>
+            :host {
+                --display: none;
+                --indent: 1em;
+                /* --icon-width: 16px;
+                --icon-height: 16px;*/
+                display: var(--display, none);
+                margin-left: var(--indent, 1em);
+            }
+
+            /*  ::slotted(iron-icon), iron-icon {
+                cursor: var(--icon-pointer, pointer);
+                width: var(--icon-width, 16px);
+                height: var(--icon-height, 16px);
+            }
+
+            ::slotted(span) {
+                text-align: center;
+            }
+
+            span2 {
+                text-align: center;
+            }*/
+
+            /*::slotted(span) {
+                text-align: center;
+            }*/
+        </style>
+        <template is="dom-if" if="{{visibleIcon}}">
+            <iron-icon class="node-icon" src$="[[_iconsrc]]" icon$="[[_icon]]" on-click="select"> </iron-icon>
+        </template>
+        <div style="display: none">
+            <iron-icon class="node-icon" src$="[[_iconsrc]]" icon$="[[_icon]]" on-click="select">
+            </iron-icon>
+        </div>
+        <slot></slot>
+        <slot name="csaktreeitemslot"></slot>
+    </template>
+
+    <script>
+        /**
+  * # This is an h1 heading
+   * `<csak-tree-item>` is a items for <csak-tree>   
+   * In typical use, just put some `<csak-tree-item>` into `<csak-tree>`   
+   * <csak-tree>
+   *   <csak-tree-item>First item</csak-tree-item>
+   * </csak-tree>
+   * Wham! It's all awesome now!
+ * 
+ * @class CsakTreeItem
+ * @extends {Polymer.Element}
+ * @customElement
+ * @polymer
+ * @demo https://path/to/awesomeness/demo/
+ */
+        class CsakTreeItem extends Polymer.Element {
+            static get is() {
+                return "csak-tree-item";
+            }
+
+            /**
+             * Creates an instance of CsakTreeItem.
+             * @memberof CsakTreeItem
+             */
+            constructor() {
+                super();
+                if (!this.icon) {
+                    this.icon = '';
+                }
+                if (!this._icon) {
+                    this._icon = '';
+                }
+            }
+
+            static get properties() {
+                return {
+                    _id: {
+                        type: String,
+                        notify: true
+                    },
+                    icon: String,
+                    _icon: String,
+                    _iconsrc: String,
+                    text: {
+                        type: String,
+                        notify: true,
+                        observer: '_textChange'
+                    },
+                    visible: {
+                        type: Boolean,
+                        observer: '_visibleChange'
+                    },
+                    expanded: {
+                        type: Boolean,
+                        value: false,
+                        observer: '_expandedChange'
+                    },
+                    branchicon: String,
+                    branchiconopen: String,
+                    leaficon: String,
+                    isleaf: {
+                        type: Boolean,
+                        notify: true,
+                        observer: '_isleafChange'
+                    },
+                    roottree: Object,
+                    parentitem: Object,
+                    selected: {
+                        type: Boolean,
+                        value: false,
+                        observer: '_selectedChange'
+                    },
+                    visibleIcon: {
+                        type: Boolean,
+                        value: false,
+                        notify: true
+                    },
+
+                    locked: {
+                        type: Boolean,
+                        value: false,
+                        notify: true,
+                        observer: '_lockedChange'
+                    },
+
+                    _targetelement: Object,
+
+                    targetelement: {
+                        type: String,
+                        notify: true,
+                        observer: '_targetelementChange'
+                    },
+
+                    _hidedefaultcomps: {
+                        type: Boolean,
+                        notify: true,
+                        value: false
+                    }
+                };
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+            }
+
+            ready() {
+                super.ready();
+                this.addEventListener('click', e => { this._handleClick(e) });
+                if (!this._hidedefaultcomps && this.innerText == "" && this.text) {
+                    this.innerText = this.text;
+                }
+                this.moveContent();
+                if (!this._id || this._id == '') {
+                    this._id = CsakTreeItem.uuidv4();
+                    this.notifyChildren();
+                }
+                if (!this.isleaf) {
+                    this.isleaf = this.childElementCount === 0;
+                    if (this.isleaf) {
+
+                    }
+                }
+            }
+
+            /**
+             * Hide all default components (its need when you want css style outside)
+             * 
+             * @memberof CsakTreeItem
+             */
+            hideDefaultComps() {
+                this._hidedefaultcomps = true;
+                this.innerText = '';
+            }
+
+            /**
+             * Fired when _selected prop change
+             * @event _selected property change
+             * @param {any} newValue 
+             * @param {any} oldValue 
+             * @memberof CsakTreeItem
+             */
+            _selectedChange(newValue, oldValue) {
+                /* if (this.rootree) {
+                      this.roottree.setSelectedItem(this, newValue);
+                  }*/
+            }
+
+            /**
+             * Set select this element
+             * 
+             * @param {any} bool 
+             * @memberof CsakTreeItem
+             */
+            setSelected(bool) {
+                if (bool /*&& this.showselected*/) {
+                    //this.$.container.classList.add("selected");
+                    this.classList.add("selected");
+                    this.classList.remove("unselected");
+                    this.selected = true;
+
+                    if (!this.visible) {
+                        this.visible = true;
+                    }
+
+                    this.expandParents();
+
+                } else {
+                    //this.$.container.classList.remove("selected");                    
+                    this.classList.add("unselected");
+                    this.classList.remove("selected");
+                    this.seleced = false;
+                }
+            }
+
+            /**
+             * Expand parent item
+             * 
+             * @memberof CsakTreeItem
+             */
+            expandParents() {
+                if (this.parentitem/* && (!this.parentitem.visible || !this.parentitem.expanded)*/) {
+                    this.parentitem.visible = true;
+                    //this.parentitem.expandChildren();
+                    this.parentitem.expandOneChild();
+                    this.parentitem.expanded = true;
+                    this.parentitem.expandParents();
+                }
+            }
+
+            /**
+             * Set defualt icon for this item
+             * 
+             * @memberof CsakTreeItem
+             */
+            _setDefaultIcons() {
+                this.leaficon = this.leaficon || this.roottree.leaficon;
+                this.branchicon = this.branchicon || this.roottree.branchicon;
+                this.branchiconopen = this.branchiconopen || this.roottree.branchiconopen;
+            }
+
+
+            /**
+             * Fired when root parent is changed
+             * 
+             * @param {CsakTree} roottree 
+             * @memberof CsakTreeItem
+             */
+            rootparentchanged(roottree) {
+                this.roottree = roottree;
+                if (this.roottree != this.parentNode) {
+                    this.parentitem = this.parentNode;
+                } else {
+                    this.parentitem = null;
+                }
+                this._setDefaultIcons();
+                this.setIcon();
+                this.notifyChildren();
+            }
+
+            /**
+             * Notify children when root parent is changed
+             * 
+             * @returns 
+             * @memberof CsakTreeItem
+             */
+            notifyChildren() {
+                if (!this._id) {
+                    //throw new Error('csak-error-001 Sometime if you use script the csak-tree-item not fired connectedcallback first');
+                    return;
+                }
+                //notify all children in tree
+                for (let item of this.children) {
+                    if (item instanceof CsakTreeItem) {
+                        item.rootparentchanged(this.roottree);
+                    }
+                }
+            }
+
+            /**
+             * Move sub components to the right slots and set text property
+             * 
+             * @returns 
+             * @memberof CsakTreeItem
+             */
+            moveContent() {
+                if (!this.text) {
+                    for (var i = 0; i < this.childNodes.length; i++) {
+                        let comp = this.childNodes[i];
+                        if ((comp.nodeName == "#text") || (comp.nodeName == "#span")) {
+                            //this.$.textslot.appendChild(comp);
+                            //this.$.usercontentslot.appendChild(comp);
+                            comp.slot = "textslot";
+                            comp.textContent = comp.textContent.trim();
+                            if (comp.textContent == "" && comp.text) {
+                                comp.textContent = comp.text.trim();
+                            }
+                        } else if (comp.nodeName == 'CSAK-TREE-ITEM') {
+                            //this.$.csaktreeitemslot.appendChild(comp);
+                            comp.slot = "csaktreeitemslot";
+                        }
+                    }
+                }
+            }
+
+            /**
+             * User click event
+             * 
+             * @param {any} e 
+             * @event
+             * @memberof CsakTreeItem
+             */
+            _handleClick(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (e.eventPhase === 2 || e.eventPhase == 3) {
+                    let comp;
+                    if (e.currentTarget instanceof CsakTreeItem) {
+                        comp = e.currentTarget;
+                    } else {
+                        comp = e.currentTarget.parentElement;
+                    }
+                    if (!comp) {
+                        throw new Error('csak-tree-item-error 002 ' + 'handleclick error: maybe too complext slot for handelclick')
+                    }
+
+                    if (!this.locked) {
+                        comp.expanded = !comp.expanded;
+                    }
+                    //this.roottree.selectedItem = this;
+                    this.selected = true;//!this.selected;    
+                    if (this.roottree) {
+                        this.roottree.setSelectedItem(this, this.selected);
+                    }
+                }
+            }
+
+            /**
+             * Show this sitem
+             * 
+             * @memberof CsakTreeItem
+             */
+            _styleShow() {
+                //this.setTextColor();
+                this.setIcon();
+                this.updateStyles({ '--display': 'block' });
+                this.hided = false
+            }
+
+            /**
+             * Hide this item
+             * 
+             * @memberof CsakTreeItem
+             */
+            _styleHide() {
+                this.updateStyles({ '--display': 'none' });
+                this.hided = true;
+            }
+
+            /**
+             * Update this element and show or hide
+             * 
+             * @memberof CsakTreeItem
+             */
+            update() {
+                //var _onelevel = onelevel || true;
+                //show item if it is visible and parent is expanded
+                if (this.visible && (!this.parentitem || (!this.parentitem.hided && this.parentitem.visible && this.parentitem.expanded))) {
+                    this._styleShow();
+                } else {
+                    this._styleHide();
+                }
+            }
+
+            /**
+             * Expand only one level
+             * 
+             * @returns 
+             * @memberof CsakTreeItem
+             */
+            expandOneChild() {
+                //this.expanded = true;
+                if (this._id === undefined) {
+                    return;
+                }
+
+                for (let item of this.children) {
+                    item.visible = true;
+                    //item.expanded = true;           
+                }
+                // if (onelevel) {
+                this.updateChildren();
+                //  }
+            }
+
+            /**
+             * Collapse children
+             * 
+             * @memberof CsakTreeItem
+             */
+            collapseChildren() {
+                for (let item of this.children) {
+                    if (item instanceof CsakTreeItem) {
+                        item.expanded = false;
+                        item.visible = false;
+                        item.collapseChildren();
+                    }
+                }
+                this.expanded = false;
+            }
+
+            /**
+             * Expand children
+             * 
+             * @memberof CsakTreeItem
+             */
+            expandChildren() {
+                this.expanded = true;
+                for (let item of this.children) {
+                    if (item instanceof CsakTreeItem) {
+                        //item.expanded = true;
+                        item.visible = true;
+                        if (!item.isleaf) {
+                            item.expandChildren();
+                        }
+                    }
+                }
+            }
+
+            /**
+             * Hide children
+             * 
+             * @returns 
+             * @memberof CsakTreeItem
+             */
+            hideChildren() {
+                if (!this._id) {
+                    return;
+                }
+                if (!this.isleaf) {
+                    for (let item of this.children) {
+                        if (item instanceof CsakTreeItem) {
+                            item._styleHide();
+                            if (!item.isleaf) {
+                                item.hideChildren();
+                            }
+                        }
+                    }
+                }
+            }
+
+            /**
+             * /Not implmented/
+             * 
+             * @param {any} newValue 
+             * @param {any} oldValue 
+             * @memberof CsakTreeItem
+             */
+            _textChange(newValue, oldValue) {
+                if (newValue) {
+                    //this.textContent = this.text;
+                }
+            }
+
+            /**
+             * If visible change then update this element
+             * 
+             * @param {any} newValue 
+             * @param {any} oldValue 
+             * @memberof CsakTreeItem
+             */
+            _visibleChange(newValue, oldValue) {
+                this.update();
+            }
+
+            /**
+             * Call all update method on children
+             * 
+             * @returns 
+             * @memberof CsakTreeItem
+             */
+            updateChildren() {
+                if (!this._id) {
+                    return;
+                }
+                if (!this.isleaf) {
+                    for (let item of this.children) {
+                        if (item instanceof CsakTreeItem) {
+                            item.update();
+                            if (!item.isleaf) {
+                                item.updateChildren();
+                            }
+                        }
+                    }
+                }
+            }
+
+            /**
+             * Fired when expanded prop is changed
+             * 
+             * @param {any} newValue 
+             * @param {any} oldValue 
+             * @returns 
+             * @memberof CsakTreeItem
+             */
+            _expandedChange(newValue, oldValue) {
+                if (!this._id) {
+                    return;
+                }
+
+                //this.setTextColor();
+                if (newValue === true) {
+                    this.expandOneChild();
+                } else {
+                    for (let item of this.children) {
+                        if (item instanceof CsakTreeItem) {
+                            item.visible = false;
+                        }
+                    }
+                    this.hideChildren();
+                }
+
+                this.setIcon();
+            }
+
+            /*setTextColor() {
+                if (this.expanded && !this.isleaf) {
+                    // this.updateStyles({ '--color': 'Navy' });
+                } else {
+                    //this.updateStyles({ '--color': 'Blue' });
+                }
+            }*/
+
+            /**
+             * Set icon for this element state
+             * 
+             * @returns 
+             * @memberof CsakTreeItem
+             */
+            setIcon() {
+                if (!this.visible) {
+                    return;
+                }
+
+                if (this.isleaf) {
+                    this._icon = this.icon || this.leaficon;
+                } else {
+                    if (this.expanded && this.branchiconopen) {
+                        this._icon = this.icon || this.branchiconopen;
+                    } else if (!this.expanded || (this.expanded && !this.branchiconopen)) {
+                        this._icon = this.icon || this.branchicon;
+                    }
+                }
+                let s = '';
+                s = this._icon;
+                if (s && s != '' && s.split('.').pop().toUpperCase() == 'SVG') {
+                    this._iconsrc = s;
+                    this._icon = '';
+                }
+                this.visibleIcon = !this._hidedefaultcomps && (this.branchicon || this.branchiconopen || this.leaficon || this.icon ? true : false);
+            }
+
+            /**
+             * If isleaf parameter si changed change icon
+             * 
+             * @param {any} newValue 
+             * @param {any} oldValue 
+             * @event
+             * @memberof CsakTreeItem
+             */
+            _isleafChange(newValue, oldValue) {
+                this.setIcon();
+            }
+
+            /**
+             * Lock item
+             * 
+             * @param {any} value 
+             * @memberof CsakTreeItem
+             */
+            lock(value) {
+                this.locked = value;
+                for (let item of this.children) {
+                    if (item instanceof CsakTreeItem) {
+                        item.lock(value);
+                    }
+                }
+            }
+
+            /**
+             * If locked prop is changed add css class locked, otherwise remove it
+             * 
+             * @param {any} newValue 
+             * @param {any} oldValue 
+             * @event
+             * @memberof CsakTreeItem
+             */
+            _lockedChange(newValue, oldValue) {
+                if (newValue) {
+                    this.classList.add("locked");
+                } else {
+                    this.classList.remove("locked");
+                }
+            }
+
+            /**
+             * Targetelement chenged
+             * 
+             * @param {any} newValue 
+             * @param {any} oldValue 
+             * @event
+             * @memberof CsakTreeItem
+             */
+            _targetelementChange(newValue, oldValue) {
+                this._targetelement = document.querySelector(newValue);
+
+            }
+
+            /**
+             * Generate uuid for _id
+             * 
+             * @static
+             * @returns 
+             * @memberof CsakTreeItem
+             */
+            static uuidv4() {
+                return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+                    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+                )
+            }
+        }
+
+        customElements.define(CsakTreeItem.is, CsakTreeItem);
+    </script>
+
+</dom-module>

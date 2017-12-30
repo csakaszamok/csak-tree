@@ -1,0 +1,44 @@
+{
+  "name": "csak-tree",
+  "description": "Polmyer 2 webcomponent for treeview,filetree,menutree,tree",
+  "main": "csak-tree.html",
+  "version": "0.4.0",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "vaadin-icons": "^4.1.3",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
+    "iron-icon": "^2.0.1",
+    "iron-iconset-svg": "^2.1.0",
+    "iron-icons": "^2.0.1"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "paper-button": "^2.0.0",
+    "monaco-editor": "PolymerVis/monaco-editor#^2.0.2",
+    "paper-checkbox": "^2.0.1"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  },
+  "homepage": "https://github.com/csakaszamok/csak-tree",
+  "authors": [
+    "csakaszamok <csakaszamok@gmail.com>"
+  ],
+  "keywords": [
+    "treeview",
+    "filetree",
+    "menutree",
+    "tree",
+    "polymer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    ".vscode",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
