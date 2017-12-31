@@ -22,7 +22,7 @@ Example:
 -->
 
 ```html    
-<csak-tree class="classictreeview" expanded>
+<csak-tree class="classictreeview" style=" --iron-icon-width=16px" branchiconopen="vaadin:minus-square-o" branchicon="vaadin:plus-square-o" expanded>
   <csak-tree-item>Branch
     <csak-tree-item>Branch             
         <csak-tree-item>Leaf</csak-tree-item>
