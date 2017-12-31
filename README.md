@@ -14,23 +14,17 @@ Example:
 <custom-element-demo>
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>   
-    <link rel="import" href="csak-tree.html">
-    <link rel="import" href="csak-tree-item.html">
+    <link rel="import" href="csak-tree.html">   
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
 ```
 -->
 
-<!--```html
+```html
  <p class="caption">Class treeview I</p>
-      <template>
-        <style>
-          .classictreeview csak-tree-item {          
-            --iron-icon-width: 16px;
-          }
-        </style>
-        <csak-tree class="classictreeview" branchiconopen="vaadin:minus-square-o" branchicon="vaadin:plus-square-o">
+      <template>      
+        <csak-tree class="classictreeview" expanded>
           <csak-tree-item>Branch
             <csak-tree-item>Branch             
                 <csak-tree-item>Leaf</csak-tree-item>
@@ -43,7 +37,7 @@ Example:
           </csak-tree-item>
         </csak-tree>
       </template>
-```-->
+```
 
 ### Install with bower
 
