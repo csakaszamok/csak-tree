@@ -26,36 +26,20 @@ Example:
  <p class="caption">Class treeview I</p>
       <template>
         <style>
-          .classictreeview {
-            min-height: 380px;
-          }
-
-          .classictreeview csak-tree-item {
-            --indent: 4vw;
+          .classictreeview csak-tree-item {          
             --iron-icon-width: 16px;
           }
         </style>
         <csak-tree class="classictreeview" branchiconopen="vaadin:minus-square-o" branchicon="vaadin:plus-square-o">
           <csak-tree-item>Branch
-            <csak-tree-item>Branch
-              <csak-tree-item>Branch
+            <csak-tree-item>Branch             
                 <csak-tree-item>Leaf</csak-tree-item>
                 <csak-tree-item>Leaf</csak-tree-item>
               </csak-tree-item>
-              <csak-tree-item>Branch
-                <csak-tree-item>Branch
-                  <csak-tree-item>Leaf</csak-tree-item>
-                  <csak-tree-item>Leaf</csak-tree-item>
-                </csak-tree-item>
-              </csak-tree-item>
-              <csak-tree-item>Leaf</csak-tree-item>
-            </csak-tree-item>
-            <csak-tree-item>Branch
-              <csak-tree-item>Leaf</csak-tree-item>
-              <csak-tree-item>Leaf</csak-tree-item>
-            </csak-tree-item>
-            <csak-tree-item>Leaf</csak-tree-item>
-            <csak-tree-item>Leaf</csak-tree-item>
+              <csak-tree-item>Branch               
+                 <csak-tree-item>Leaf</csak-tree-item>
+                 <csak-tree-item>Leaf</csak-tree-item>
+              </csak-tree-item>             
           </csak-tree-item>
         </csak-tree>
       </template>
