@@ -1,0 +1,30 @@
+{
+  "name": "monaco-editor",
+  "description": "A Polymer 2.0 element for Monaco Editor, an browser-based code editor.",
+  "main": "monaco-elements.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "polymer-vis": "PolymerVis/polymer-vis#^2.0.1"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
+    "vega-element": "PolymerVis/vega-element#^2.0.3",
+    "paper-button": "PolymerElements/paper-button#^2.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  },
+  "homepage": "https://github.com/PolymerVis/monaco-editor",
+  "version": "2.0.2",
+  "_release": "2.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.0.2",
+    "commit": "74c7c794e77b8dadf84759681f486f99299cb570"
+  },
+  "_source": "https://github.com/PolymerVis/monaco-editor.git",
+  "_target": "^2.0.2",
+  "_originalSource": "PolymerVis/monaco-editor"
+}
