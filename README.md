@@ -21,22 +21,19 @@ Example:
 ```
 -->
 
-```html
- <p class="caption">Class treeview I</p>
-      <template>      
-        <csak-tree class="classictreeview" expanded>
-          <csak-tree-item>Branch
-            <csak-tree-item>Branch             
-                <csak-tree-item>Leaf</csak-tree-item>
-                <csak-tree-item>Leaf</csak-tree-item>
-              </csak-tree-item>
-              <csak-tree-item>Branch               
-                 <csak-tree-item>Leaf</csak-tree-item>
-                 <csak-tree-item>Leaf</csak-tree-item>
-              </csak-tree-item>             
-          </csak-tree-item>
-        </csak-tree>
-      </template>
+```html    
+<csak-tree class="classictreeview" expanded>
+  <csak-tree-item>Branch
+    <csak-tree-item>Branch             
+        <csak-tree-item>Leaf</csak-tree-item>
+        <csak-tree-item>Leaf</csak-tree-item>
+      </csak-tree-item>
+      <csak-tree-item>Branch               
+          <csak-tree-item>Leaf</csak-tree-item>
+          <csak-tree-item>Leaf</csak-tree-item>
+      </csak-tree-item>             
+  </csak-tree-item>
+</csak-tree>    
 ```
 
 ### Install with bower
