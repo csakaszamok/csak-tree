@@ -2,7 +2,7 @@
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg?style=flat-square)](https://beta.webcomponents.org/element/csakaszamok/csak-tree)
 
-:zap: Its just a tree. A tree view. A file tree. A menu tree. A tree for you.  
+Its just a tree. A tree view. A file tree. A menu tree. A tree for you.  
 
 The missing Polymer 2.x webcomponent.  
 
@@ -22,7 +22,7 @@ Example:
 ```
 -->
 
-```html
+<!--```html
  <p class="caption">Class treeview I</p>
       <template>
         <style>
@@ -43,15 +43,14 @@ Example:
           </csak-tree-item>
         </csak-tree>
       </template>
+```-->
+
+### Install with bower
+
+First you need bower, [see their site](http://bower.io/) for details 
+
 ```
-
-## Installation
-
-First, make sure you have [Bower](https://bower.io/) and the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed.
-
-```
-bower install
-polymer serve -o
+bower install --save csak-tree
 ```
 
 ## Use cases
