@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>csak-tree demo</title>
+
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+
+    <link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../csak-tree.html">
+    <link rel="import" href="../csak-tree-item.html">
+
+    <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+    <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="../bower_components/iron-iconset-svg/iron-iconset-svg.html">
+    
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+
+    <custom-style>
+        <style is="custom-style" include="demo-pages-shared-styles">
+            p.caption {
+                font-weight: bolder;
+            }
+        </style>
+    </custom-style>
+</head>
+
+<body>
+    <!-- https://medium.com/flexbox-and-grids/css-flexbox-grid-layout-how-to-approach-css-layouts-in-2017-and-beyond-685deef03e6c -->
+
+    <div class="vertical-section-container centered">
+        <h3>csak-tree demo</h3>
+
+        <demo-snippet id="imagedemo">
+            <p class="caption">Tree with custom images</p>
+            <!--<p>Image from: https://www.flaticon.com/free-icon/ </p>-->
+            <template>
+                <style>
+                    .imagedemo {
+                        --indent: 5em;
+                        background-color: #503ba2;
+                        min-height: 500px;
+                    }
+
+                    .imagedemo img {
+                        width: 100px;
+                        height: 100px;                       
+                    }
+
+                    .userimg {
+                        width: 100px;
+                        height: 100px;                       
+                    }
+
+                    .imagedemo csak-tree-item {
+                        --indent: 5em;
+                        vertical-align: middle;
+                    }
+
+                    .imagedemo csak-tree-item#firstelement {
+                        --indent: 0em;
+                    }
+
+                    .imagedemo csak-tree-item img {
+                        vertical-align: middle;
+                    }                  
+                </style>
+
+                <csak-tree class="imagedemo">
+                    <csak-tree-item id="firstelement">
+                        <div>
+                            <span>
+                                <img class="userimg" src="fish512.png" alt="Main fish" />
+                            </span>
+                            <span></span>
+                        </div>
+                        <csak-tree-item>
+                            <img src="piranha512.png " />
+                            <csak-tree-item>
+                                <img src="orca512.png" /> </csak-tree-item>
+                        </csak-tree-item>
+                        <csak-tree-item>
+                            <div>
+                                <img src="salmon512.png" />
+                            </div>
+                            <csak-tree-item>
+                                <img src="tuna512.png" />
+                            </csak-tree-item>
+                        </csak-tree-item>
+                    </csak-tree-item>
+                </csak-tree>
+            </template>
+        </demo-snippet>
+
+
+    </div>
+    <script>
+        document.addEventListener('WebComponentsReady', function (e) {
+            console.info('Webcomponents is ready.')
+        });
+    </script>
+</body>
+
+</html>
