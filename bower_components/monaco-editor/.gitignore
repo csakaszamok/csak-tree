@@ -34,9 +34,20 @@ build/Release
 
 # Dependency directories
 jspm_packages/
-/node_modules/*
-/node_modules/monaco-editor/min/vs
-!/node_modules/monaco-editor/min/vs/*
+
+node_modules/*
+!node_modules/monaco-editor
+
+node_modules/monaco-editor/*
+!node_modules/monaco-editor/min
+
+#node_modules/monaco-editor/min/vs/
+#!node_modules/monaco-editor/min/vs/loader.js
+#pippo/*
+#!pippo/pluto
+#pippo/pluto/*
+#!pippo/pluto/paperino.xml
+
 
 # Typescript v1 declaration files
 typings/
