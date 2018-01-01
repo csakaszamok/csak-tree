@@ -82,7 +82,7 @@
             <br>
             <br> Selected node:
             <label id="idselectednode"></label>
-            <csak-tree id="eventsdemotree" class="eventsdemotree" locked="{{locked}}" onclick="eventsDemo.treeOnClick(this)" leaficon="editor:insert-drive-file"
+            <csak-tree id="eventsdemotree" class="eventsdemotree" locked="{{locked}}" leaficon="editor:insert-drive-file"
               branchiconopen="vaadin:folder-open" branchicon="icons:folder">
               <csak-tree-item>
                 Branch
@@ -121,6 +121,9 @@
               //init variables            
               this.eventsDemo = document.querySelector('.eventsdemo');
               this.eventsdemotree = this.eventsDemo.$.eventsdemotree;
+              this.eventsdemotree.onclick = this.treeOnClick();
+
+              //onclick="eventsDemo.treeOnClick(this)"
             }
 
             treeOnClick(e) {
@@ -142,6 +145,7 @@
           }
 
           var eventsDemo;
+          eventsDemo = new EventsDemo();
           window.addEventListener('WebComponentsReady', function (e) {
             eventsDemo = new EventsDemo();
           });
