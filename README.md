@@ -83,7 +83,7 @@ data='{
               ]
             }        
           ]
-        }'>
+        }' expanded>
 </csak-tree>    
 ```
 
@@ -95,7 +95,7 @@ First you need bower, [see their site](http://bower.io/) for details
 bower install --save csak-tree
 ```
 
-### API documentation with demos
+### API documentation
 
 [Online API documentation](https://csakaszamok.github.io/csak-tree/)
 
@@ -103,8 +103,8 @@ bower install --save csak-tree
 
 Custom property | Description | Default
 ----------------|-------------|---------
---indent | Items indent value | 1em
---iron-icon-width | Inherited css variable | 16px
+--csak-tree-item-indent | Items indent value | 1em
+--iron-icon-width | Inherited css variable | 16px    
 
 ## Use cases
 > + menutree
