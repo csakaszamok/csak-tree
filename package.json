@@ -4,7 +4,7 @@
   "description": "tree-menu",
   "main": "index.js",
   "directories": {
-    "test": "test"
+    "test": "test "
   },
   "scripts": {
     "dev": "polymer serve --port 8081 | npm run watch",
