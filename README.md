@@ -23,7 +23,7 @@ Example 1
 -->
 
 ```html    
-<csak-tree style=" --iron-icon-width:16px" branchiconopen="vaadin:minus-square-o" branchicon="vaadin:plus-square-o" expanded>
+<csak-tree branchiconopen="vaadin:minus-square-o" branchicon="vaadin:plus-square-o" expanded>
   <csak-tree-item>Branch
     <csak-tree-item>Branch             
         <csak-tree-item>Leaf</csak-tree-item>
@@ -39,9 +39,21 @@ Example 1
 
 Example2
 
+<!---
+```
+<custom-element-demo>
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>   
+    <link rel="import" href="csak-tree.html">   
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+
 ```html    
-<csak-tree style=" --iron-icon-width:16px" branchiconopen="vaadin:minus-square-o" branchicon="vaadin:plus-square-o" expanded data=
-  data='{            
+<csak-tree branchiconopen="vaadin:minus-square-o" branchicon="vaadin:plus-square-o" expanded
+ data='{            
             "children ": [  
                   {
                     "name": "Bracnh",
