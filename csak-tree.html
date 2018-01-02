@@ -333,6 +333,9 @@
         if (newValue) {
           let datajson = JSON.parse(newValue);
           this._processData(datajson, this);
+          if (this.expanded) {
+            this.expandAll();
+          }
         }
       }
 

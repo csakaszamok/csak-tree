@@ -43,6 +43,8 @@ Example2
 ```
 <custom-element-demo>
   <template>   
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>   
+    <link rel="import" href="csak-tree.html">   
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
@@ -50,23 +52,39 @@ Example2
 -->
 
 ```html    
-<csak-tree branchiconopen="vaadin:minus-square-o" branchicon="vaadin:plus-square-o" expanded
- data='{            
-            "children ": [  
+<csak-tree branchiconopen="vaadin:minus-square-o" branchicon="vaadin:plus-square-o"
+data='{            
+      "children ": [  
+            {
+              "name": "Branch",
+              "children": [                     
+                {
+                  "name": "Branch",
+                  "children": [                     
+                  { 
+                    "name": "leaf"                        
+                  },
                   {
-                    "name": "Bracnh",
-                    "children": [                     
-                      { 
-                        "name": "leaf"                        
-                      },
-                      {
-                        "name": "leaf"                        
-                      }                      
-                    ]
-                  }        
-               ]
-             }'>
-             </csak-tree>    
+                    "name": "leaf"                        
+                  }                      
+                ]                           
+                }   ,
+                {
+                  "name": "Branch",
+                  "children": [                     
+                  { 
+                    "name": "leaf"                        
+                  },
+                  {
+                    "name": "leaf"                        
+                  }                      
+                ]                           
+                }                      
+              ]
+            }        
+          ]
+        }'>
+</csak-tree>    
 ```
 
 ### Install with bower
@@ -76,6 +94,8 @@ First you need bower, [see their site](http://bower.io/) for details
 ```
 bower install --save csak-tree
 ```
+
+### API documentation with demos
 
 [Online API documentation](https://csakaszamok.github.io/csak-tree/)
 
