@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>csak-tree demo</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  
+
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../csak-tree.html">
+  <link rel="import" href="../csak-tree-item.html">
+  <link rel="import" href="../../iron-icon/iron-icon.html">
+  <link rel="import" href="../../iron-icons/iron-icons.html">
+  <link rel="import" href="../../iron-iconset-svg/iron-iconset-svg.html">  
+  
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+      p.caption {
+        font-weight: bolder;
+      }
+    </style>
+  </custom-style>
+</head>
+
+<body>
+  <!-- https://medium.com/flexbox-and-grids/css-flexbox-grid-layout-how-to-approach-css-layouts-in-2017-and-beyond-685deef03e6c -->
+
+  <div class="vertical-section-container centered">
+    <h3>csak-tree demo</h3>    
+    <demo-snippet>
+      <p class="caption">Class treeview II</p>
+      <p> Multiple root</p>
+      <template>       
+        <csak-tree class="classictreeviewii" branchicon="vscode-app/collapsed-arrow.svg" branchiconopen="vscode-app/expanded-arrow.svg">
+          <csak-tree-item>Branch
+            <csak-tree-item>Branch
+              <csak-tree-item>Branch
+                <csak-tree-item>Leaf</csak-tree-item>
+                <csak-tree-item>Leaf</csak-tree-item>
+              </csak-tree-item>
+              <csak-tree-item>Branch
+                <csak-tree-item>Branch
+                  <csak-tree-item>Leaf</csak-tree-item>
+                  <csak-tree-item>Leaf</csak-tree-item>
+                </csak-tree-item>
+              </csak-tree-item>
+              <csak-tree-item>Leaf</csak-tree-item>
+            </csak-tree-item>
+            <csak-tree-item>Branch
+              <csak-tree-item>Leaf</csak-tree-item>
+              <csak-tree-item>Leaf</csak-tree-item>
+            </csak-tree-item>
+            <csak-tree-item>Leaf</csak-tree-item>
+            <csak-tree-item>Leaf</csak-tree-item>
+          </csak-tree-item>
+        </csak-tree>
+      </template>
+    </demo-snippet>
+
+  </div>
+  <script>
+    document.addEventListener('WebComponentsReady', function (e) {     
+      console.info('Webcomponents is ready.')
+    });
+  </script>
+</body>
+
+</html>
