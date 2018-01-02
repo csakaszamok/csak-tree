@@ -42,9 +42,7 @@ Example2
 <!---
 ```
 <custom-element-demo>
-  <template>
-    <script src="../webcomponentsjs/webcomponents-lite.js"></script>   
-    <link rel="import" href="csak-tree.html">   
+  <template>   
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
