@@ -11,11 +11,11 @@
         <style>
             :host {
                 --display: none;
-                --indent: 1em;
-                /* --icon-width: 16px;
-                --icon-height: 16px;*/
+                --csak-tree-item-indent: 1em;              
                 display: var(--display, none);
-                margin-left: var(--indent, 1em);
+                margin-left: var(--csak-tree-item-indent, 1em);           
+                --iron-icon-width: var(--iron-icon-width-csak, 16px);
+              /*--iron-icon-height: var(--iron-icon-height-csak, 16px);*/
             }
 
             /*  ::slotted(iron-icon), iron-icon {
@@ -48,14 +48,21 @@
     </template>
 
     <script>
-        /**
-  * # This is an h1 heading
-   * `<csak-tree-item>` is a items for <csak-tree>   
-   * In typical use, just put some `<csak-tree-item>` into `<csak-tree>`   
-   * <csak-tree>
-   *   <csak-tree-item>First item</csak-tree-item>
-   * </csak-tree>
-   * Wham! It's all awesome now!
+ /**
+ * # This is an h1 heading
+ * `<csak-tree-item>` is a items for <csak-tree>   
+ * In typical use, just put some `<csak-tree-item>` into `<csak-tree>`   
+ * <csak-tree>
+ *   <csak-tree-item>First item</csak-tree-item>
+ * </csak-tree>
+ * Wham! It's all awesome now!
+ *
+ * ## Styling
+ *
+ *  Custom property | Description | Default
+ *  ----------------|-------------|---------
+ *  --csak-tree-item-indent | Items indent value | 1em
+ *  --iron-icon-width | Inherited css variable | 16px
  * 
  * @class CsakTreeItem
  * @extends {Polymer.Element}
@@ -294,6 +301,7 @@
              */
             moveContent() {
                 if (!this.text) {
+                    //debugger
                     for (var i = 0; i < this.childNodes.length; i++) {
                         let comp = this.childNodes[i];
                         if ((comp.nodeName == "#text") || (comp.nodeName == "#span")) {
@@ -301,6 +309,9 @@
                             //this.$.usercontentslot.appendChild(comp);
                             comp.slot = "textslot";
                             comp.textContent = comp.textContent.trim();
+                            if (!this.text || this.text == "") {
+                                this.text = comp.textContent.trim();
+                            }
                             if (comp.textContent == "" && comp.text) {
                                 comp.textContent = comp.text.trim();
                             }

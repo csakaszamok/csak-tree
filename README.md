@@ -44,6 +44,15 @@ First you need bower, [see their site](http://bower.io/) for details
 bower install --save csak-tree
 ```
 
+[Online API documentation](https://csakaszamok.github.io/csak-tree/)
+
+## Styling
+
+Custom property | Description | Default
+----------------|-------------|---------
+--indent | Items indent value | 1em
+--iron-icon-width | Inherited css variable | 16px
+
 ## Use cases
 > + menutree
 > + classic treeview
@@ -65,3 +74,11 @@ bower install --save csak-tree
 ### filetree
 
 ![](https://github.com/csakaszamok/csak-tree/blob/master/csaktree_vscodemonaco.gif?raw=true)
+
+## Contributing
+
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D

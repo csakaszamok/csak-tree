@@ -1,4 +1,3 @@
-
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="bower_components/iron-icons/iron-icons.html">
@@ -15,11 +14,6 @@
         cursor: pointer;
         display: var(--display, inline-block);
       }
-
-      /* csak-tree-item:not(:checked) {
-        display: none;
-        background-color: rgb(61, 63, 63);
-      }*/
     </style>
 
 
@@ -36,12 +30,19 @@
     *   <csak-tree-item>First item</csak-tree-item>
     * </csak-tree>
     * Wham! It's all awesome now!
+    *
+    * ## Styling
+    *
+    *  Custom property | Description | Default
+    *  ----------------|-------------|---------
+    *  --csak-tree-item-indent | Items indent value | 1em
+    *  --iron-icon-width | Inherited css variable | 16px    
     * 
     * @class CsakTree
     * @extends {Polymer.Element}
     * @customElement
     * @polymer
-    * @_demo https://path/to/awesomeness/demo/
+    * @demo https://path/to/awesomeness/demo/
     */
     class CsakTree extends Polymer.Element {
       static get is() { return 'csak-tree'; }
@@ -158,7 +159,7 @@
         for (let item of this.children) {
           if (item instanceof CsakTreeItem) {
             item.visible = true;
-            item.updateStyles({ '--indent': '0em' });
+            item.updateStyles({ '--csak-tree-item-indent': '0em' });
           }
         }
         this.addEventListener('click', e => { this._handleClick(e) });
