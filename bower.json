@@ -2,7 +2,7 @@
   "name": "csak-tree",
   "description": "Polmyer 2 webcomponent for treeview,filetree,menutree,tree",
   "main": "csak-tree.html",
-  "version": "0.4.13",
+  "version": "0.4.14",
   "demos": { 
     "Treemenu demo": "https://csakaszamok.github.io/csak-tree/demo/demo_treemenu.html",
     "Classic treeview I demo":  "https://csakaszamok.github.io/csak-tree/demo/demo_classici.html",

@@ -77,7 +77,7 @@
           data: {
             type: String,
             notify: true,
-            value: '',
+          //  value: '',
             observer: '_dataChange'
           }
         };
@@ -296,10 +296,14 @@
             newDiv.insertBefore(el.shadowRoot.querySelector('.node-icon'), newContent);
             //the default components cant style outside, so we hide it, and add some span comp :(
             el.hideDefaultComps();
-            el.appendChild(newDiv);
-
+            Polymer.dom(el).appendChild(newDiv);
+          }
+          if (parent instanceof CsakTree){
+            el.visible = true;
+            el.expanded = false;
           }
         }
+    
         //arrays
         for (let key of keys) {
           let value = json[key];
