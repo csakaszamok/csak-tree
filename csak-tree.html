@@ -319,6 +319,12 @@
         }
       }
 
+      _clearTree(parent) {
+        while (parent.lastChild) {
+          parent.removeChild(parent.lastChild);
+        }
+      }
+
       /**
        * When set data prop then fire _processData method
        * 
@@ -329,6 +335,7 @@
       _dataChange(newValue, oldValue) {
         if (newValue) {
           let datajson = JSON.parse(newValue);
+          this._clearTree(this);
           this._processData(datajson, this);
           if (this.expanded) {
             this.expandAll();
