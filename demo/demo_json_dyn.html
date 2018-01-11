@@ -71,9 +71,40 @@
                                     ]
                                   }        
                                ]
-                             }`;    
-                    var tree1 = document.querySelector('#tree1');    
-                    tree1.data = json;
+                             }`;
+                    var json2 = `{"children ": [  
+                                  {
+                                    "name": "Branch-new",
+                                    "children": [                     
+                                      {
+                                        "name": "Branch-new",
+                                        "children": [                     
+                                        { 
+                                          "name": "Leaf-new"                        
+                                        },
+                                        {
+                                          "name": "Leaf-new"                        
+                                        }                      
+                                      ]                           
+                                      }   ,
+                                      {
+                                        "name": "Branch-new",
+                                        "children": [                     
+                                        { 
+                                          "name": "Leaf-new"                        
+                                        },
+                                        {
+                                          "name": "Leaf-new"                        
+                                        }                      
+                                      ]                           
+                                      }                      
+                                    ]
+                                  }        
+                               ]
+                             }`;
+                    var tree1 = document.querySelector('#tree1');
+                    tree1.data = json;                    
+                    tree1.data = json2;
                 });     
             </script>
         </demo-snippet>
