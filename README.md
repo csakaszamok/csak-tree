@@ -62,10 +62,10 @@ data='{
                   "name": "Branch",
                   "children": [                     
                   { 
-                    "name": "leaf"                        
+                    "name": "Leaf"                        
                   },
                   {
-                    "name": "leaf"                        
+                    "name": "Leaf"                        
                   }                      
                 ]                           
                 }   ,
@@ -73,10 +73,10 @@ data='{
                   "name": "Branch",
                   "children": [                     
                   { 
-                    "name": "leaf"                        
+                    "name": "Leaf"                        
                   },
                   {
-                    "name": "leaf"                        
+                    "name": "Leaf"                        
                   }                      
                 ]                           
                 }                      

@@ -38,11 +38,11 @@
             <template>
                 <csak-tree id="tree1" class="classictreeview" branchiconopen="vaadin:minus-square-o" branchicon="vaadin:plus-square-o">
                 </csak-tree>
-            </template>
-            <script>
-                document.addEventListener('WebComponentsReady', function (e) {
-                    console.info('Webcomponents is ready.');
-                    var json = `{"children ": [  
+
+                <script>
+                    document.addEventListener('WebComponentsReady', function (e) {
+                        console.info('Webcomponents is ready.');
+                        var json = `{"children ": [  
                                   {
                                     "name": "Branch",
                                     "children": [                     
@@ -72,7 +72,7 @@
                                   }        
                                ]
                              }`;
-                    var json2 = `{"children ": [  
+                        var json2 = `{"children ": [  
                                   {
                                     "name": "Branch-new",
                                     "children": [                     
@@ -102,13 +102,13 @@
                                   }        
                                ]
                              }`;
-                    var tree1 = document.querySelector('#tree1');
-                    tree1.data = json;                    
-                    tree1.data = json2;
-                });     
-            </script>
+                        var tree1 = document.querySelector('#tree1');
+                        tree1.data = json;
+                        tree1.data = json2;
+                    });     
+                </script>
+            </template>
         </demo-snippet>
-
     </div>
 
 </body>
